@@ -20,6 +20,10 @@ body {
   color: var(--dark-purple);
 }
 
+p {
+  font-size: large;
+}
+
 /* *############
   * HEADER STYLES
   * ############ */
