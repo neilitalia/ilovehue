@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/x-icon" href="favicon.ico" />
   <link rel="icon" type="image/png" href="favicon-32x32.png" />
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="css/styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200;400;700&display=swap" rel="stylesheet">
@@ -21,12 +21,24 @@
   <main>
     <div>
       <h1>Wanna know to play?</h1>
+      <div class="game-board">
+        <div class="game-tile" data-position="0"></div>
+        <div class="game-tile" data-position="1"></div>
+        <div class="game-tile" data-position="2"></div>
+        <div class="game-tile" data-position="3"></div>
+        <div class="game-tile" data-position="4"></div>
+        <div class="game-tile" data-position="5"></div>
+        <div class="game-tile" data-position="6"></div>
+        <div class="game-tile" data-position="7"></div>
+        <div class="game-tile" data-position="8"></div>
+      </div>
       <article>
         <h3>First you're given a shuffled grid</h3>
-        <p>Some tiles are fixed, use these fixed tiles as reference for how the grid should look</p>
+        <p>Some tiles are fixed, use these fixed tiles as reference for how the grid should look.</p>
       </article>
       <article>
-        Your main goal is sort and move tiles around so the colors flow properly
+        <h3>Your main goal is sort tiles so the colors flow</h3>
+        <p>You can drag and drop tiles. Switch tiles around by picking up one tile and dropping it into the tile you want to swap with.</p>
       </article>
     </div>
   </main>
