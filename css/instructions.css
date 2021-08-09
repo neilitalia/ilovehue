@@ -27,3 +27,17 @@ article > div.game-board {
 article > P {
   max-width: 30vw;
 }
+
+div.draggable {
+  cursor: move;
+}
+
+div.fixed::after {
+  content: '·';
+  color: black;
+  font-size: 50px;
+  margin-left: 22px;
+}
+
+div.active-tile {
+}
