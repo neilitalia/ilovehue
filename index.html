@@ -5,10 +5,42 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200;400;700&display=swap" rel="stylesheet">
   <title>I Love Hue</title>
 </head>
 <body>
-  <h1>Hello</h1>
+  <header>
+    <h1>I Love Hue</h1>
+    <h3>Welcome, User.</h3>
+    <h3>Your score: 0</h3>
+  </header>
+  <main>
+    <div class="game-board">
+      <div class="game-tile" data-position="0"></div>
+      <div class="game-tile" data-position="1"></div>
+      <div class="game-tile" data-position="2"></div>
+      <div class="game-tile" data-position="3"></div>
+      <div class="game-tile" data-position="4"></div>
+      <div class="game-tile" data-position="5"></div>
+      <div class="game-tile" data-position="6"></div>
+      <div class="game-tile" data-position="7"></div>
+      <div class="game-tile" data-position="8"></div>
+    </div>
+    <div class="cookie-prompt">
+      <h3>This game uses cookies.</h3>
+      <p>This is to give you the best experience. We want to store your name and score in case you come back later. Wish we could give away free cookies though.</p>
+      <p>What's your name?</p>
+      <input type="text" placeholder="Name" class="name-input">
+      <button class="accept-button">Accept & Continue</button>
+    </div>
+  </main>
+  <footer>
+    <a href="#">Home</a>
+    <a href="#">How To Play</a>
+    <a href="#">Credits</a>
+  </footer>
   <script src="script.js"></script>
 </body>
 </html>

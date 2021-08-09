@@ -41,3 +41,4 @@ Visit the [live demo hosted on Surge](https://github.com/neilitalia/ilovehue), r
 ## 📢 Shoutouts
 
 [The Original Game](http://i-love-hue.com/)
+[Cookies and Dates](https://www.tutorialrepublic.com/javascript-tutorial/javascript-cookies.php)
