@@ -23,9 +23,9 @@ This is a peaceful game of sorting colors. The goal of the game is to sort an en
 
 ## 🏗 Design Considerations
 
-<div align="center">
+<div align="center"><pre>
   <img src="https://i.imgur.com/hGHYsIy.png" width="300" height="200" />&nbsp;<img src="https://i.imgur.com/BFjkQfm.png" width="300" height="200" />&nbsp;<img src="https://i.imgur.com/Z4MKllF.png" width="300" height="200" />
-</div>
+</pre></div>
 
 
 ## 🕹 Game Modes
