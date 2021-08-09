@@ -21,6 +21,12 @@ This is a peaceful game of sorting colors. The goal of the game is to sort an en
   <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/HTML5_logo_and_wordmark.svg/120px-HTML5_logo_and_wordmark.svg.png" width="200" height="200" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/CSS3_logo_and_wordmark.svg/120px-CSS3_logo_and_wordmark.svg.png" width="140" height="200" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Unofficial_JavaScript_logo_2.svg/512px-Unofficial_JavaScript_logo_2.svg.png" width="160" height="160" />
 </div>
 
+## 🏗 Design Considerations
+
+<div align="center">
+  <img src="https://i.imgur.com/hGHYsIy.png" width="300" height="200" />&nbsp;<img src="https://i.imgur.com/BFjkQfm.png" width="300" height="200" />&nbsp;<img src="https://i.imgur.com/Z4MKllF.png" width="300" height="200" />
+</div>
+
 
 ## 🕹 Game Modes
 
