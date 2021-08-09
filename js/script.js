@@ -11,7 +11,6 @@ const formatCookiesToObj = () => {
   })
   let formattedCookies = Object.fromEntries(preformatted)
   cookies = formattedCookies
-  console.log('cookies :>> ', cookies)
 }
 
 const updateNameDisplay = () => {

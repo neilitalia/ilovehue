@@ -40,5 +40,5 @@ div.fixed::after {
 }
 
 div.active-tile {
-  border: 1px solid red;
+  border: 3px solid red;
 }

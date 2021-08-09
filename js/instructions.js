@@ -1,5 +1,15 @@
-const tiles = document.querySelectorAll('div.game-tile.draggable')
-const board = document.getElementById('playable')
+const board = document.querySelector('div.game-board#playable')
+const tiles = document.querySelectorAll('div.game-board#playable>div.game-tile')
+const gameState = {}
+
+const updateGameState = () => {
+  const preformattedGameState = document.querySelectorAll(
+    'div.game-board#playable>div.game-tile'
+  )
+  preformattedGameState.forEach((tile) => {
+    // console.log(tile.dataset.position)
+  })
+}
 
 const handleLift = (tile) => {
   tile.classList.add('active-tile')
@@ -11,6 +21,7 @@ const getTileBelow = (mouseY) => {
 
 const handleDrop = (tile) => {
   tile.classList.remove('active-tile')
+  updateGameState()
 }
 
 tiles.forEach((tile) => {
@@ -24,7 +35,8 @@ tiles.forEach((tile) => {
 
 board.addEventListener('dragover', (event) => {
   event.preventDefault()
+  console.log(event.target.previousElementSibling)
   const activeTile = document.querySelector('div.active-tile')
-  console.log('Dragging over')
-  board.appendChild(activeTile)
+  // console.log('Dragging over')
+  board.append(activeTile)
 })
