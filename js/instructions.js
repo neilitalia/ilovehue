@@ -55,14 +55,14 @@ const handleDragOver = (event) => {
 }
 
 const attachEventListenerToTile = (tiles) => {
-  tiles.forEach((tile) => {
-    tile.addEventListener('dragstart', () => {
-      handleLift(tile)
-    })
-    tile.addEventListener('dragend', () => {
-      handleDrop(tile)
-    })
-  })
+  // tiles.forEach((tile) => {
+  //   tile.addEventListener('dragstart', () => {
+  //     handleLift(tile)
+  //   })
+  //   tile.addEventListener('dragend', () => {
+  //     handleDrop(tile)
+  //   })
+  // })
 }
 
 board.addEventListener('dragover', (event) => {
