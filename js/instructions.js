@@ -1,9 +1,11 @@
-const board = document.querySelector('div.game-board#playable')
 const gridSize = 3
 let gameState = []
 let tiles = null
 let heldTile = null
 let droppedToTile = null
+
+const board = document.querySelector('div.game-board#playable')
+const hoveringSquare = document.querySelector('div.hovering-square')
 
 const renderGrid = () => {
   gameState.forEach((i) => {
@@ -31,17 +33,25 @@ const generateGridArray = () => {
 const handleLift = (tile) => {
   console.log('Lifting lifting')
   heldTile = tile.dataset.position
+  tile.classList.add('active-tile')
+  hoveringSquare.classList.remove('hidden')
 }
 
 const handleDrop = (tile) => {
   console.log('heldTile :>> ', heldTile)
   console.log('droppedTo :>> ', droppedToTile)
   // console.log('tiles :>>', tiles)
+  hoveringSquare.classList.add('hidden')
+  tile.classList.remove('active-tile')
 }
 
 const handleDragOver = (event) => {
   event.preventDefault()
   droppedToTile = event.toElement.dataset.position
+  const x = event.clientX - 25
+  const y = event.clientY - 25
+  hoveringSquare.style.left = `${x}px`
+  hoveringSquare.style.top = `${y}px`
 }
 
 const attachEventListenerToTile = (tiles) => {
