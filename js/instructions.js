@@ -32,7 +32,6 @@ const renderGrid = () => {
     }
 
     newDiv.setAttribute('data-position', tile)
-    newDiv.innerHTML = tile
     gameBoard.appendChild(newDiv)
   })
   const currentTiles = document.querySelectorAll(
