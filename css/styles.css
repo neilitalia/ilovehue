@@ -105,51 +105,6 @@ div.cookie-prompt > button:hover {
   cursor: pointer;
 }
 
-div[data-position='0'] {
-  background-color: #d12665;
-  animation: grow 500ms ease;
-}
-
-div[data-position='1'] {
-  background-color: #8a3ffc;
-  animation: grow 750ms ease;
-}
-
-div[data-position='2'] {
-  background-color: #0062ff;
-  animation: grow 1000ms ease;
-}
-
-div[data-position='3'] {
-  background-color: #ee538b;
-  animation: grow 750ms ease;
-}
-
-div[data-position='4'] {
-  background-color: #a970ff;
-  animation: grow 1000ms ease;
-}
-
-div[data-position='5'] {
-  background-color: #418cff;
-  animation: grow 1250ms ease;
-}
-
-div[data-position='6'] {
-  background-color: #fa75a6;
-  animation: grow 1000ms ease;
-}
-
-div[data-position='7'] {
-  background-color: #bb8eff;
-  animation: grow 1250ms ease;
-}
-
-div[data-position='8'] {
-  background-color: #6ea6ff;
-  animation: grow 1500ms ease;
-}
-
 /* *############
   * FOOTER STYLES
   * ############ */

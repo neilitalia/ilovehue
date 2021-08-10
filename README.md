@@ -4,7 +4,7 @@
 
 Handmade with love by Neil Italia
 
-[Live Demo](https://github.com/neilitalia/ilovehue)  |  [Trello Board](https://trello.com/b/B9M9YXxq)  |  [Connect with me on LinkedIn!](https://www.linkedin.com/in/neilitalia/)
+[Live Demo](https://neilitalia.github.io/ilovehue/)&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[Trello Board](https://trello.com/b/B9M9YXxq)&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;[Connect with me on LinkedIn!](https://www.linkedin.com/in/neilitalia/)
 
 </div>
 
@@ -35,11 +35,13 @@ You can play a 3x3 board (Beginner), a 6x6 board (Advanced), or a full 9x9 board
 
 ## 🚦 Getting Started 
 
-Visit the [live demo hosted on Surge](https://github.com/neilitalia/ilovehue), read through the initial prompt for your name and if you want to accept cookies for this game.
+Visit the [live demo hosted on Surge](https://neilitalia.github.io/ilovehue/) or [GitHub Pages](https://neilitalia.github.io/ilovehue/), read through the initial prompt for your name and if you want to accept cookies for this game.
 
 
 ## 📢 Shoutouts
 
 [The Original Game](http://i-love-hue.com/)
+
 [Cookies](https://gist.github.com/rendro/525bbbf85e84fa9042c2)
+
 [Cookies and Dates](https://www.tutorialrepublic.com/javascript-tutorial/javascript-cookies.php)
