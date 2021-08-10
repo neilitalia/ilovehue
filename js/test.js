@@ -1,10 +1,57 @@
 const gameContainer = document.querySelector('main.game-container')
+let gameState = {
+  firstTileClicked: {
+    position: null,
+    value: ''
+  },
+  secondTileClicked: {
+    position: null,
+    value: ''
+  },
+  currentState: [],
+  winningState: []
+}
 
-const renderPuzzleFromObj = () => {
-  const puzzleName = 'autumn'
-  const puzzle = getPuzzles(puzzleName)
+const resetHeldTiles = () => {
+  gameState.firstTileClicked.position = null
+  gameState.secondTileClicked.position = null
+}
+
+const handleTileClick = (tilePosition, tileValue) => {
+  if (
+    gameState.firstTileClicked.position === null &&
+    gameState.secondTileClicked.position === null
+  ) {
+    gameState.firstTileClicked.position = tilePosition
+    gameState.firstTileClicked.value = tileValue
+  } else if (
+    gameState.firstTileClicked.position !== null &&
+    gameState.secondTileClicked.position === null
+  ) {
+    gameState.secondTileClicked.position = tilePosition
+    gameState.secondTileClicked.value = tileValue
+    console.log(
+      'gameState.firstTileCliked :>> ',
+      gameState.firstTileClicked.position,
+      gameState.firstTileClicked.value
+    )
+    console.log(
+      'gameState.secondTileClicked :>> ',
+      gameState.secondTileClicked.position,
+      gameState.secondTileClicked.value
+    )
+    resetHeldTiles()
+  }
+}
+
+const getPuzzle = (query) => {
+  const puzzle = getPuzzles(query)
+  gameState.currentState = puzzle.board
+  renderPuzzle(puzzle)
+}
+
+const renderPuzzle = (puzzle) => {
   const gameBoard = document.createElement('div')
-
   gameBoard.classList.add('preview-board', `${puzzle.difficulty}`)
   gameBoard.style.cssText = `
     height: ${puzzle.boardSize};
@@ -29,6 +76,9 @@ const renderPuzzleFromObj = () => {
     if (isFixed) {
       tileDiv.classList.add('fixed')
     } else {
+      tileDiv.addEventListener('click', () => {
+        handleTileClick(index, tile)
+      })
       tileDiv.addEventListener('mouseenter', () => {
         tileDiv.classList.add('hovered-tile')
       })
@@ -42,5 +92,5 @@ const renderPuzzleFromObj = () => {
 }
 
 window.addEventListener('load', () => {
-  renderPuzzleFromObj()
+  getPuzzle('harvest')
 })

@@ -30,6 +30,7 @@ const updateScoreDisplay = () => {
 
 const renderPuzzles = () => {
   const puzzleContainer = document.querySelector('main.puzzles')
+  // TODO: improve scope of onboarding
   onboarding.classList.add('hidden')
   puzzleContainer.classList.remove('hidden')
   puzzleContainer.style.animation = 'fadeIn 1.5s ease'
