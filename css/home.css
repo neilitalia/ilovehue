@@ -1,5 +1,7 @@
 main.puzzles {
-  width: 5000px;
+  overflow: auto;
+  padding: 100px 0 100px 0px;
+  max-width: 100vw; !important
 }
 
 article {
@@ -20,6 +22,12 @@ div.preview-board {
   height: 450px;
   width: 450px;
   display: grid;
+}
+article:first-child {
+  margin-left: calc(100% + 30px);
+}
+article:last-child {
+  margin-right: 100px;
 }
 
 div.preview-board:hover {
