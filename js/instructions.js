@@ -5,7 +5,6 @@ let gameState = {
   fixedTiles: [0, 2, 6, 8],
   array: []
 }
-let tiles = null
 
 const resetHeldTiles = () => {
   gameState.heldTile = null
@@ -13,11 +12,9 @@ const resetHeldTiles = () => {
 }
 
 const setGameState = (tiles) => {
-  console.log('tiles :>> ', tiles)
   tiles.forEach((tile, index) => {
     const currentTile = parseInt(tile.dataset.position)
     gameState.array[index] = currentTile
-    console.log('gameState.array :>> ', gameState.array)
   })
 }
 
@@ -27,42 +24,50 @@ const renderGrid = () => {
   gameState.array.forEach((tile) => {
     const newDiv = document.createElement('div')
     newDiv.classList.add('game-tile')
+
     if (gameState.fixedTiles.includes(tile)) {
       newDiv.classList.add('fixed')
     } else {
       newDiv.classList.add('draggable')
     }
+
     newDiv.setAttribute('data-position', tile)
+    newDiv.innerHTML = tile
     gameBoard.appendChild(newDiv)
   })
-  resetHeldTiles()
-  tiles = document.querySelectorAll('div.game-board#playable>div.game-tile')
-  attachEventListenerToTile(tiles)
-  setGameState(tiles)
+  const currentTiles = document.querySelectorAll(
+    'div.game-board#playable>div.game-tile'
+  )
+  attachEventListenerToTile(currentTiles)
+  setGameState(currentTiles)
+}
+
+const swapTilePositions = (held, dropped) => {
+  const heldIndex = gameState.array.indexOf(parseInt(held))
+  const droppedIndex = gameState.array.indexOf(parseInt(dropped))
+  ;[gameState.array[heldIndex], gameState.array[droppedIndex]] = [
+    gameState.array[droppedIndex],
+    gameState.array[heldIndex]
+  ]
+  renderGrid()
+}
+
+const handleTileClick = (tile) => {
+  if (gameState.heldTile === null && gameState.droppedToTile === null) {
+    gameState.heldTile = tile.dataset.position
+  } else if (gameState.heldTile !== null && gameState.droppedToTile === null) {
+    gameState.droppedToTile = tile.dataset.position
+    swapTilePositions(gameState.heldTile, gameState.droppedToTile)
+    resetHeldTiles()
+  } else {
+    resetHeldTiles()
+  }
 }
 
 const generateGridArray = () => {
   const fullGridSize = Math.pow(gridSize, 2)
   gameState.array = Array.from(Array(fullGridSize).keys())
   renderGrid()
-}
-
-const swapTilePositions = (tileA, tileB) => {
-  const temp = parseInt(tileA)
-  gameState.array[tileA] = gameState.array[tileB]
-  gameState.array[tileB] = temp
-  console.log(gameState.array)
-  // renderGrid()
-}
-
-const handleTileClick = (tile) => {
-  console.log('clicked ', tile.dataset.position)
-  if (!gameState.heldTile) {
-    gameState.heldTile = tile.dataset.position
-  } else {
-    gameState.droppedToTile = tile.dataset.position
-    swapTilePositions(gameState.heldTile, gameState.droppedToTile)
-  }
 }
 
 const attachEventListenerToTile = (tiles) => {
