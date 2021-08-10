@@ -33,7 +33,11 @@ article > P {
 }
 
 div.draggable {
-  cursor: move;
+  cursor: pointer;
+}
+
+div.fixed {
+  cursor: not-allowed;
 }
 
 div.fixed::after {
