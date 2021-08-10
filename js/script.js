@@ -41,7 +41,7 @@ const renderPuzzles = () => {
   previewTiles.forEach((tile) => {
     const tileColor = tile.dataset.tileColor
     tile.style.backgroundColor = tileColor
-    tile.style.animation = `grow 1500ms ease`
+    tile.style.animation = `grow 1000ms ease`
   })
 }
 

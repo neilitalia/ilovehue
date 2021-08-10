@@ -1,7 +1,6 @@
 main.puzzles {
   overflow: auto;
   padding: 100px 0 100px 0px;
-  max-width: 100vw; !important
 }
 
 article {
