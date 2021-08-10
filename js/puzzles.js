@@ -1,9 +1,10 @@
-const getPuzzle = (puzzleName) => {
+const getPuzzles = (puzzleName) => {
   const summer = {
     name: 'summer',
     difficulty: 'easy',
     gridSize: 3,
     tileSize: '150px',
+    boardSize: '450px',
     board: [
       '#57C2DA',
       '#7BA683',
@@ -14,7 +15,8 @@ const getPuzzle = (puzzleName) => {
       '#D5E8F5',
       '#C7D194',
       '#B8BF33'
-    ]
+    ],
+    fixedTiles: [0, 2, 6, 8]
   }
 
   const autumn = {
@@ -22,6 +24,7 @@ const getPuzzle = (puzzleName) => {
     difficulty: 'easy',
     gridSize: 3,
     tileSize: '150px',
+    boardSize: '450px',
     board: [
       '#C24141',
       '#793A2C',
@@ -32,7 +35,8 @@ const getPuzzle = (puzzleName) => {
       '#F4C9A3',
       '#D89571',
       '#C2694A'
-    ]
+    ],
+    fixedTiles: [0, 2, 6, 8]
   }
 
   const winter = {
@@ -40,6 +44,7 @@ const getPuzzle = (puzzleName) => {
     difficulty: 'easy',
     gridSize: 3,
     tileSize: '150px',
+    boardSize: '450px',
     board: [
       '#276574',
       '#1F3C4C',
@@ -50,7 +55,8 @@ const getPuzzle = (puzzleName) => {
       '#DBE686',
       '#BADDAB',
       '#96D5CD'
-    ]
+    ],
+    fixedTiles: [0, 2, 6, 8]
   }
 
   switch (puzzleName) {
