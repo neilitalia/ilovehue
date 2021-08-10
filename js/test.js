@@ -1,4 +1,5 @@
 const gameContainer = document.querySelector('main.game-container')
+const boardSelector = document.querySelector('input.board-input')
 let gameState = {
   firstTileClicked: {
     position: null,
@@ -91,6 +92,14 @@ const renderPuzzle = (puzzle) => {
   gameContainer.append(gameBoard)
 }
 
+boardSelector.addEventListener('keypress', function (event) {
+  if (event.key === 'Enter') {
+    gameContainer.innerHTML = ''
+    const selected = boardSelector.value
+    getPuzzle(selected)
+  }
+})
+
 window.addEventListener('load', () => {
-  getPuzzle('harvest')
+  getPuzzle('midsommar')
 })
