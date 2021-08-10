@@ -30,8 +30,6 @@ const updateScoreDisplay = () => {
 
 const renderPuzzles = () => {
   const puzzleContainer = document.querySelector('main.puzzles')
-  // TODO: improve scope of onboarding
-  onboarding.classList.add('hidden')
   puzzleContainer.classList.remove('hidden')
   puzzleContainer.style.animation = 'fadeIn 1.5s ease'
   const previewTiles = document.querySelectorAll(
@@ -53,6 +51,7 @@ const acceptCookiesAndName = () => {
   document.cookie = `score=0; max-age=${30 * 24 * 60 * 60};`
   onboarding.style.animation = 'fadeOut 1.5s ease'
   setTimeout(function () {
+    onboarding.classList.add('hidden')
     renderPuzzles()
   }, 1400)
 }
@@ -60,9 +59,9 @@ const acceptCookiesAndName = () => {
 window.addEventListener('load', () => {
   cookies = document.cookie
   formatCookiesToObj()
-  if (cookies.visited) {
-    renderPuzzles()
-  } else {
+  if (!cookies.visited) {
+    onboarding.classList.remove('hidden')
+    onboarding.style.animation = 'fadeIn 1.5s ease'
     const acceptButton = document.querySelector('button.accept-button')
     acceptButton.addEventListener('click', () => {
       acceptCookiesAndName()
