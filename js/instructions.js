@@ -3,7 +3,7 @@ let gameState = {
   heldTile: null,
   droppedToTile: null,
   fixedTiles: [0, 2, 6, 8],
-  array: []
+  array: [0, 7, 2, 1, 5, 4, 6, 3, 8]
 }
 
 const resetHeldTiles = () => {
@@ -81,5 +81,11 @@ const attachEventListenerToTile = (tiles) => {
 }
 
 window.addEventListener('load', () => {
-  generateGridArray()
+  // generateGridArray()
+  renderGrid()
+  const currentTiles = document.querySelectorAll('div.game-board>div.game-tile')
+  currentTiles.forEach((tile) => {
+    const randomDuration = 500 + Math.floor(Math.random() * 1000)
+    tile.style.animation = `grow ${randomDuration}ms ease`
+  })
 })
