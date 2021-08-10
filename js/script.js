@@ -20,11 +20,18 @@ const updateNameDisplay = () => {
   }
 }
 
+const resetCookies = () => {
+  document.cookie = `name='';expires=Thu, 01 Jan 1970 00:00:00 GMT;`
+  document.cookie = `visited=false; expires=Thu, 01 Jan 1970 00:00:00 GMT`
+  document.cookie = `score=0;expires=Thu, 01 Jan 1970 00:00:00 GMT;`
+  location.reload()
+}
+
 const updateScoreDisplay = () => {
   if (cookies.visited) {
-    scoreDisplay.innerHTML = `Your score: ${cookies.score}`
+    scoreDisplay.innerHTML = `Your score: ${cookies.score} 🔄`
   } else {
-    scoreDisplay.innerHTML = `Your score: 0`
+    scoreDisplay.innerHTML = `Your score: 0 🔄`
   }
 }
 
@@ -59,7 +66,11 @@ const acceptCookiesAndName = () => {
 window.addEventListener('load', () => {
   cookies = document.cookie
   formatCookiesToObj()
-  if (!cookies.visited) {
+  if (
+    cookies.visited === null ||
+    cookies.visited === false ||
+    cookies.visited === undefined
+  ) {
     onboarding.classList.remove('hidden')
     onboarding.style.animation = 'fadeIn 1.5s ease'
     const acceptButton = document.querySelector('button.accept-button')
@@ -69,4 +80,8 @@ window.addEventListener('load', () => {
   }
   updateNameDisplay()
   updateScoreDisplay()
+})
+
+scoreDisplay.addEventListener('click', () => {
+  resetCookies()
 })
