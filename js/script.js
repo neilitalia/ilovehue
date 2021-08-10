@@ -1,9 +1,6 @@
-const nameInput = document.querySelector('input.name-input')
 const nameDisplay = document.querySelector('h3.name-display')
 const scoreDisplay = document.querySelector('h3.score-display')
-const acceptButton = document.querySelector('button.accept-button')
 const onboarding = document.querySelector('main.onboarding')
-const puzzles = document.querySelector('main.puzzles')
 let cookies = null
 
 const formatCookiesToObj = () => {
@@ -32,9 +29,10 @@ const updateScoreDisplay = () => {
 }
 
 const renderPuzzles = () => {
+  const puzzleContainer = document.querySelector('main.puzzles')
   onboarding.classList.add('hidden')
-  puzzles.classList.remove('hidden')
-  puzzles.style.animation = 'fadeIn 1.5s ease'
+  puzzleContainer.classList.remove('hidden')
+  puzzleContainer.style.animation = 'fadeIn 1.5s ease'
   const previewTiles = document.querySelectorAll(
     'div.preview-board>div.game-tile'
   )
@@ -46,6 +44,7 @@ const renderPuzzles = () => {
 }
 
 const acceptCookiesAndName = () => {
+  const nameInput = document.querySelector('input.name-input')
   const name = nameInput.value
   nameDisplay.innerHTML = `Welcome, ${name}!`
   document.cookie = `name=${name}; max-age=${30 * 24 * 60 * 60};`
@@ -62,11 +61,12 @@ window.addEventListener('load', () => {
   formatCookiesToObj()
   if (cookies.visited) {
     renderPuzzles()
+  } else {
+    const acceptButton = document.querySelector('button.accept-button')
+    acceptButton.addEventListener('click', () => {
+      acceptCookiesAndName()
+    })
   }
   updateNameDisplay()
   updateScoreDisplay()
-})
-
-acceptButton.addEventListener('click', () => {
-  acceptCookiesAndName()
 })
