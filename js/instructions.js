@@ -18,17 +18,59 @@ const setGameState = (tiles) => {
   })
 }
 
-const renderGrid = () => {
+const swapTilePositions = (held, dropped) => {
+  const heldIndex = gameState.array.indexOf(parseInt(held))
+  const droppedIndex = gameState.array.indexOf(parseInt(dropped))
+  ;[gameState.array[heldIndex], gameState.array[droppedIndex]] = [
+    gameState.array[droppedIndex],
+    gameState.array[heldIndex]
+  ]
+  renderGrid(held, dropped)
+}
+
+const handleTileClick = (tile) => {
+  const tilePosition = tile.dataset.position
+  // * if no tiles are held to be switched
+  if (gameState.heldTile === null && gameState.droppedToTile === null) {
+    gameState.heldTile = tilePosition
+    tile.classList.add('active-tile')
+  } else if (gameState.heldTile !== null && gameState.droppedToTile === null) {
+    // * if a 1st tile is selected but a 2nd one isnt
+    gameState.droppedToTile = tilePosition
+    tile.style.animation = 'shrink 500ms ease'
+    document.querySelector('div.active-tile').style.animation =
+      'shrink 200ms ease'
+    setTimeout(function () {
+      swapTilePositions(gameState.heldTile, gameState.droppedToTile)
+      resetHeldTiles()
+    }, 200)
+  } else {
+    resetHeldTiles()
+  }
+}
+
+const generateGridArray = () => {
+  const fullGridSize = Math.pow(gridSize, 2)
+  gameState.array = Array.from(Array(fullGridSize).keys())
+  renderGrid()
+}
+
+const renderGrid = (tile1, tile2) => {
   const gameBoard = document.querySelector('div#playable')
   gameBoard.innerHTML = ''
   gameState.array.forEach((tile) => {
     const newDiv = document.createElement('div')
     newDiv.classList.add('game-tile')
 
+    // * adds styling based on if tile is fixed or draggable
     if (gameState.fixedTiles.includes(tile)) {
       newDiv.classList.add('fixed')
     } else {
       newDiv.classList.add('draggable')
+    }
+
+    if (tile == tile1 || tile == tile2) {
+      newDiv.style.animation = 'growGameTile 200ms ease'
     }
 
     newDiv.setAttribute('data-position', tile)
@@ -39,34 +81,6 @@ const renderGrid = () => {
   )
   attachEventListenerToTile(currentTiles)
   setGameState(currentTiles)
-}
-
-const swapTilePositions = (held, dropped) => {
-  const heldIndex = gameState.array.indexOf(parseInt(held))
-  const droppedIndex = gameState.array.indexOf(parseInt(dropped))
-  ;[gameState.array[heldIndex], gameState.array[droppedIndex]] = [
-    gameState.array[droppedIndex],
-    gameState.array[heldIndex]
-  ]
-  renderGrid()
-}
-
-const handleTileClick = (tile) => {
-  if (gameState.heldTile === null && gameState.droppedToTile === null) {
-    gameState.heldTile = tile.dataset.position
-  } else if (gameState.heldTile !== null && gameState.droppedToTile === null) {
-    gameState.droppedToTile = tile.dataset.position
-    swapTilePositions(gameState.heldTile, gameState.droppedToTile)
-    resetHeldTiles()
-  } else {
-    resetHeldTiles()
-  }
-}
-
-const generateGridArray = () => {
-  const fullGridSize = Math.pow(gridSize, 2)
-  gameState.array = Array.from(Array(fullGridSize).keys())
-  renderGrid()
 }
 
 const attachEventListenerToTile = (tiles) => {
