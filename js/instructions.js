@@ -1,14 +1,14 @@
 const gridSize = 3
 let gameState = {
-  heldTile: null,
-  droppedToTile: null,
+  firstTileClicked: null,
+  secondTileClicked: null,
   fixedTiles: [0, 2, 6, 8],
   array: [0, 7, 2, 1, 5, 4, 6, 3, 8]
 }
 
 const resetHeldTiles = () => {
-  gameState.heldTile = null
-  gameState.droppedToTile = null
+  gameState.firstTileClicked = null
+  gameState.secondTileClicked = null
 }
 
 const setGameState = (tiles) => {
@@ -31,17 +31,23 @@ const swapTilePositions = (held, dropped) => {
 const handleTileClick = (tile) => {
   const tilePosition = tile.dataset.position
   // * if no tiles are held to be switched
-  if (gameState.heldTile === null && gameState.droppedToTile === null) {
-    gameState.heldTile = tilePosition
+  if (
+    gameState.firstTileClicked === null &&
+    gameState.secondTileClicked === null
+  ) {
+    gameState.firstTileClicked = tilePosition
     tile.classList.add('active-tile')
-  } else if (gameState.heldTile !== null && gameState.droppedToTile === null) {
+  } else if (
+    gameState.firstTileClicked !== null &&
+    gameState.secondTileClicked === null
+  ) {
     // * if a 1st tile is selected but a 2nd one isnt
-    gameState.droppedToTile = tilePosition
+    gameState.secondTileClicked = tilePosition
     tile.style.animation = 'shrink 500ms ease'
     document.querySelector('div.active-tile').style.animation =
       'shrink 200ms ease'
     setTimeout(function () {
-      swapTilePositions(gameState.heldTile, gameState.droppedToTile)
+      swapTilePositions(gameState.firstTileClicked, gameState.secondTileClicked)
       resetHeldTiles()
     }, 200)
   } else {

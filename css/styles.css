@@ -2,6 +2,7 @@
   --tan: #e9e9d1;
   --dark-purple: #181519;
   --green: #388e3c;
+  --red: #c24141;
 }
 
 * {
@@ -29,12 +30,38 @@ p {
   * ############ */
 
 header {
+  position: sticky;
   padding: 15px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: baseline;
   color: var(--dark-purple);
+}
+
+h3.score-display {
+  cursor: pointer;
+  position: relative;
+}
+
+h3.score-display::before {
+  content: attr(data-text);
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 15px;
+  width: 200px;
+  padding: 10px 0;
+  border-radius: 10px;
+  background: var(--red);
+  color: var(--tan);
+  text-align: center;
+  box-shadow: 0px 10px 10px #c2414173;
+  opacity: 0;
+  transition: 0.2s ease;
+}
+h3.score-display:hover:before {
+  opacity: 1;
 }
 
 /* *############
@@ -47,7 +74,7 @@ main {
   align-items: center;
 }
 
-div.game-board {
+main.onboarding > div.game-board {
   display: grid;
   grid-template-columns: repeat(3, 200px);
   grid-template-rows: repeat(3, 200px);
@@ -130,5 +157,37 @@ footer > a {
   100% {
     opacity: 1;
     transform: scale(1);
+  }
+}
+
+@keyframes shrink {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+    border-radius: 10px;
+  }
+
+  100% {
+    opacity: 0.9;
+    transform: scale(0.9);
+    border-radius: 10px;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
