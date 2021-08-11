@@ -8,14 +8,23 @@ let gameState = {
   secondTileClicked: {
     position: null,
     value: ''
-  },
-  currentState: [],
-  winningState: []
+  }
 }
 
 const resetHeldTiles = () => {
   gameState.firstTileClicked.position = null
   gameState.secondTileClicked.position = null
+}
+
+const checkForWin = () => {
+  const gameTiles = Array.from(document.querySelectorAll('div.game-tile'))
+  const mismatches = gameTiles.filter((tile, index) => {
+    const tilePosition = parseInt(tile.dataset.position)
+    if (tilePosition !== index) {
+      return true
+    }
+  })
+  console.log('mismatches :>> ', mismatches)
 }
 
 const handleTileClick = (tilePosition, tileValue) => {
@@ -31,23 +40,12 @@ const handleTileClick = (tilePosition, tileValue) => {
   ) {
     gameState.secondTileClicked.position = tilePosition
     gameState.secondTileClicked.value = tileValue
-    console.log(
-      'gameState.firstTileCliked :>> ',
-      gameState.firstTileClicked.position,
-      gameState.firstTileClicked.value
-    )
-    console.log(
-      'gameState.secondTileClicked :>> ',
-      gameState.secondTileClicked.position,
-      gameState.secondTileClicked.value
-    )
     resetHeldTiles()
   }
 }
 
 const getPuzzle = (query) => {
   const puzzle = getPuzzles(query)
-  gameState.currentState = puzzle.board
   renderPuzzle(puzzle)
 }
 
@@ -77,6 +75,7 @@ const renderPuzzle = (puzzle) => {
     if (isFixed) {
       tileDiv.classList.add('fixed')
     } else {
+      tileDiv.classList.add('draggable')
       tileDiv.addEventListener('click', () => {
         handleTileClick(index, tile)
       })
@@ -88,6 +87,12 @@ const renderPuzzle = (puzzle) => {
       })
     }
     gameBoard.append(tileDiv)
+  })
+  Sortable.create(gameBoard, {
+    swap: true,
+    filter: '.fixed',
+    animation: 250,
+    onEnd: () => checkForWin()
   })
   gameContainer.append(gameBoard)
 }
@@ -101,5 +106,5 @@ boardSelector.addEventListener('keypress', function (event) {
 })
 
 window.addEventListener('load', () => {
-  getPuzzle('midsommar')
+  getPuzzle('summer')
 })
