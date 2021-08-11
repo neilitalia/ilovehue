@@ -159,3 +159,35 @@ footer > a {
     transform: scale(1);
   }
 }
+
+@keyframes shrink {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+    border-radius: 10px;
+  }
+
+  100% {
+    opacity: 0.9;
+    transform: scale(0.9);
+    border-radius: 10px;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

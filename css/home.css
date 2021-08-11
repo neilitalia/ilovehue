@@ -100,21 +100,3 @@ main.onboarding > div.game-board > div[data-position='8'] {
   background-color: #6ea6ff;
   animation: grow 1500ms ease;
 }
-
-@keyframes fadeOut {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
