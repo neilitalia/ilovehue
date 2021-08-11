@@ -74,7 +74,7 @@ main {
   align-items: center;
 }
 
-div.game-board {
+main.onboarding > div.game-board {
   display: grid;
   grid-template-columns: repeat(3, 200px);
   grid-template-rows: repeat(3, 200px);

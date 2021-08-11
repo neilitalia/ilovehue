@@ -1,10 +1,33 @@
 main.puzzles {
+  flex-direction: row;
+  justify-content: flex-start;
   overflow: auto;
   padding: 100px 0 100px 0px;
 }
 
+/* width */
+::-webkit-scrollbar {
+  height: 13px;
+  width: 13px;
+}
+
+::-webkit-scrollbar-button {
+  width: 5%;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 13px;
+  background: #1815192a;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb:horizontal {
+  background: var(--dark-purple);
+  border-radius: 10px;
+}
+
 article {
-  margin: 0 30px;
+  margin: 0 50px;
   cursor: pointer;
   transition: all 0.3s ease;
 }
@@ -18,10 +41,10 @@ article > h1 {
 }
 
 article:first-child {
-  margin-left: calc(100% + 30px);
+  margin-left: 10%;
 }
 article:last-child {
-  margin-right: 100px;
+  margin-right: 10%;
 }
 
 div.preview-board:hover {

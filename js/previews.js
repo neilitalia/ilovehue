@@ -44,15 +44,8 @@ const renderPuzzlePreviews = () => {
     previewArticle.append(previewDifficulty)
     previewContainer.append(previewArticle)
   })
-  // const previewTiles = document.querySelectorAll(
-  //   'div.preview-board>div.game-tile'
-  // )
-  // previewTiles.forEach((tile) => {
-  //   const tileColor = tile.dataset.tileColor
-  //   tile.style.backgroundColor = tileColor
-  //   tile.style.animation = `grow 1000ms ease`
-  // })
 }
+
 window.addEventListener('load', () => {
   if (cookies.visited) {
     renderPuzzlePreviews()
