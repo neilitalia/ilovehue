@@ -35,20 +35,6 @@ const updateScoreDisplay = () => {
   }
 }
 
-const renderPuzzles = () => {
-  const puzzleContainer = document.querySelector('main.puzzles')
-  puzzleContainer.classList.remove('hidden')
-  puzzleContainer.style.animation = 'fadeIn 1.5s ease'
-  const previewTiles = document.querySelectorAll(
-    'div.preview-board>div.game-tile'
-  )
-  previewTiles.forEach((tile) => {
-    const tileColor = tile.dataset.tileColor
-    tile.style.backgroundColor = tileColor
-    tile.style.animation = `grow 1000ms ease`
-  })
-}
-
 const acceptCookiesAndName = () => {
   const nameInput = document.querySelector('input.name-input')
   const name = nameInput.value
@@ -59,7 +45,7 @@ const acceptCookiesAndName = () => {
   onboarding.style.animation = 'fadeOut 1.5s ease'
   setTimeout(function () {
     onboarding.classList.add('hidden')
-    renderPuzzles()
+    renderPuzzlePreviews()
   }, 1400)
 }
 
@@ -76,6 +62,12 @@ window.addEventListener('load', () => {
     const acceptButton = document.querySelector('button.accept-button')
     acceptButton.addEventListener('click', () => {
       acceptCookiesAndName()
+    })
+    const nameInput = document.querySelector('input.name-input')
+    nameInput.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') {
+        acceptCookiesAndName()
+      }
     })
   }
   updateNameDisplay()
