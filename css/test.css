@@ -19,9 +19,8 @@ div.fixed::after {
   transform: translate(-50%, -50%);
 }
 
-input.board-input {
-  width: 200px;
-  height: 10px;
-  padding: 20px;
-  margin: 0 auto;
+main.game-preview {
+  z-index: -10;
+  user-select: none;
+  pointer-events: none;
 }
