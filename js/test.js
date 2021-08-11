@@ -44,42 +44,8 @@ const handleTileClick = (tilePosition, tileValue) => {
   }
 }
 
-const shufflePuzzle = (puzzle) => {
-  let board = puzzle.board
-  let unshuffled = board.length - 1
-
-  // * Get fixed tiles (tiles in corners)
-  const fixedTileIndexes = puzzle.fixedTiles
-  const fixedTiles = fixedTileIndexes.map((tile) => {
-    return board[tile]
-  })
-
-  // * Shuffle entire board
-  while (unshuffled > 0) {
-    const random = Math.floor(Math.random() * unshuffled)
-    const temp = board[random]
-    board[random] = board[unshuffled]
-    board[unshuffled] = temp
-    unshuffled -= 1
-  }
-
-  // * Restore fixed tiles to original places
-  fixedTiles.forEach((fixedTile, index) => {
-    const fixedTilePosition = board.indexOf(fixedTile)
-
-    const toSwap = board[fixedTileIndexes[index]]
-    const toSwapPosition = board.indexOf(toSwap)
-
-    ;[board[fixedTilePosition], board[toSwapPosition]] = [
-      board[toSwapPosition],
-      board[fixedTilePosition]
-    ]
-  })
-}
-
 const getPuzzle = (query) => {
   const puzzle = getPuzzles(query)
-  shufflePuzzle(puzzle)
   renderPuzzle(puzzle)
 }
 
@@ -140,5 +106,5 @@ boardSelector.addEventListener('keypress', function (event) {
 })
 
 window.addEventListener('load', () => {
-  getPuzzle('frost')
+  getPuzzle('summer')
 })
