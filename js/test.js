@@ -1,25 +1,11 @@
 const gameContainer = document.querySelector('main.game-container')
 const gameState = {
-  firstTileClicked: {
-    position: null,
-    value: ''
-  },
-  secondTileClicked: {
-    position: null,
-    value: ''
-  },
   selectedPuzzle: null,
   shuffledPuzzle: null
 }
 
-const resetHeldTiles = () => {
-  gameState.firstTileClicked.position = null
-  gameState.secondTileClicked.position = null
-}
-
 const checkForWin = () => {
   const gameTiles = Array.from(document.querySelectorAll('div.game-tile'))
-  // console.log('gameTiles :>> ', gameTiles)
   const mismatches = gameTiles.filter((tile, index) => {
     const tilePosition = parseInt(tile.dataset.position)
     if (tilePosition !== index) {
@@ -27,23 +13,6 @@ const checkForWin = () => {
     }
   })
   console.log('mismatches :>> ', mismatches)
-}
-
-const handleTileClick = (tilePosition, tileValue) => {
-  if (
-    gameState.firstTileClicked.position === null &&
-    gameState.secondTileClicked.position === null
-  ) {
-    gameState.firstTileClicked.position = tilePosition
-    gameState.firstTileClicked.value = tileValue
-  } else if (
-    gameState.firstTileClicked.position !== null &&
-    gameState.secondTileClicked.position === null
-  ) {
-    gameState.secondTileClicked.position = tilePosition
-    gameState.secondTileClicked.value = tileValue
-    resetHeldTiles()
-  }
 }
 
 const shuffleTiles = (object) => {
@@ -109,9 +78,6 @@ const renderPuzzle = (objToRender) => {
       tileDiv.classList.add('fixed')
     } else {
       tileDiv.classList.add('draggable')
-      tileDiv.addEventListener('click', () => {
-        handleTileClick(index, tile)
-      })
       tileDiv.addEventListener('mouseenter', () => {
         tileDiv.classList.add('hovered-tile')
       })
@@ -130,8 +96,15 @@ const renderPuzzle = (objToRender) => {
   gameContainer.append(gameBoard)
 }
 
+const getQueryFromURL = () => {
+  const urlQuery = new URL(window.location.href)
+  const puzzleQuery = urlQuery.hash.substring(1)
+  return puzzleQuery
+}
+
 window.addEventListener('load', () => {
-  query = 'summer'
+  query = getQueryFromURL()
+  getQueryFromURL()
   gameState.selectedPuzzle = getPuzzles(query)
   console.log('selected puzzle :>> ', gameState.selectedPuzzle)
   gameState.shuffledPuzzle = shuffleTiles(getPuzzles(query))
