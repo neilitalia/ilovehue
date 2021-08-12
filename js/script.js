@@ -24,7 +24,7 @@ const resetCookies = () => {
   document.cookie = `name='';expires=Thu, 01 Jan 1970 00:00:00 GMT;`
   document.cookie = `visited=false; expires=Thu, 01 Jan 1970 00:00:00 GMT`
   document.cookie = `score=0;expires=Thu, 01 Jan 1970 00:00:00 GMT;`
-  location.reload()
+  window.location.href = 'index.html'
 }
 
 const updateScoreDisplay = (score) => {
@@ -49,27 +49,28 @@ const acceptCookiesAndName = () => {
   }, 1400)
 }
 
+const onboard = () => {
+  onboarding.classList.remove('hidden')
+  onboarding.style.animation = 'fadeIn 1.5s ease'
+  const acceptButton = document.querySelector('button.accept-button')
+  acceptButton.addEventListener('click', () => {
+    acceptCookiesAndName()
+  })
+  const nameInput = document.querySelector('input.name-input')
+  nameInput.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+      acceptCookiesAndName()
+    }
+  })
+}
+
 window.addEventListener('load', () => {
   cookies = document.cookie
   formatCookiesToObj()
-  if (
-    cookies.visited === null ||
-    cookies.visited === false ||
-    cookies.visited === undefined
-  ) {
-    onboarding.classList.remove('hidden')
-    onboarding.style.animation = 'fadeIn 1.5s ease'
-    const acceptButton = document.querySelector('button.accept-button')
-    acceptButton.addEventListener('click', () => {
-      acceptCookiesAndName()
-    })
-    const nameInput = document.querySelector('input.name-input')
-    nameInput.addEventListener('keydown', (event) => {
-      if (event.key === 'Enter') {
-        acceptCookiesAndName()
-      }
-    })
+  if (!cookies.visited) {
+    onboard()
   }
+
   updateNameDisplay()
   updateScoreDisplay()
 })

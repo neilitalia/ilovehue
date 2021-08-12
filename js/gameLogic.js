@@ -71,9 +71,17 @@ const shuffleTiles = (object) => {
   return newShuffledObject
 }
 
-const renderPuzzle = (objToRender) => {
+const renderPuzzle = (objToRender, frozen) => {
+  gameContainer.innerHTML = ''
+  gameContainer.style.animation = 'fadeIn 1s ease-in'
+
   const puzzle = objToRender
   const gameBoard = document.createElement('div')
+
+  frozen
+    ? gameContainer.classList.add('frozen')
+    : gameContainer.classList.remove('frozen')
+
   gameBoard.classList.add('preview-board', `${puzzle.difficulty}`)
   gameBoard.style.cssText = `
     height: ${puzzle.boardSize};
@@ -128,19 +136,18 @@ window.addEventListener('load', () => {
     window.location.href = 'index.html'
   }
   query = getQueryFromURL()
-  getQueryFromURL()
   gameState.selectedPuzzle = getPuzzles(query)
   gameState.shuffledPuzzle = shuffleTiles(getPuzzles(query))
-  renderPuzzle(gameState.selectedPuzzle)
-  gameContainer.classList.add('game-preview')
-  gameContainer.style.animation = 'fadeIn 1s ease-in'
+  // * First renders completed puzzle
+  renderPuzzle(gameState.selectedPuzzle, true)
+
+  // * Animates for a bit
   setTimeout(() => {
     gameContainer.style.animation = 'fadeOut 1s ease-out'
   }, 3000)
+
+  // * Then renders shuffled puzzle
   setTimeout(() => {
-    gameContainer.classList.remove('game-preview')
-    gameContainer.innerHTML = ''
-    gameContainer.style.animation = 'fadeIn 1s ease-in'
-    renderPuzzle(gameState.shuffledPuzzle)
-  }, 4000)
+    renderPuzzle(gameState.shuffledPuzzle, false)
+  }, 3900)
 })
