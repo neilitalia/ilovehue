@@ -29,6 +29,10 @@ div.game-tile.draggable {
   margin: 5px solid red;
 }
 
-div.win-div > h1.win-text {
+div.win-div > h1 {
   font-size: 80px;
+}
+
+div.win-div > h2 {
+  text-align: center;
 }
