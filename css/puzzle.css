@@ -1,8 +1,8 @@
 div.hovered-tile {
   z-index: 10;
-  transform: scale(1.15);
-  border-radius: 10px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+  transform: scale(1.05);
+  border-radius: 10px;
 }
 
 div.fixed {
@@ -23,10 +23,6 @@ main.frozen {
   z-index: -10;
   user-select: none;
   pointer-events: none;
-}
-
-div.game-tile.draggable {
-  margin: 5px solid red;
 }
 
 div.win-div > h1 {

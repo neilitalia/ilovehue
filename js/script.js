@@ -24,7 +24,16 @@ const resetCookies = () => {
   document.cookie = `name='';expires=Thu, 01 Jan 1970 00:00:00 GMT;`
   document.cookie = `visited=false; expires=Thu, 01 Jan 1970 00:00:00 GMT`
   document.cookie = `score=0;expires=Thu, 01 Jan 1970 00:00:00 GMT;`
-  window.location.href = 'index.html'
+  const body = document.querySelector('body')
+  fadeOut(body)
+  setTimeout(() => {
+    removeChildrenFrom(body)
+    window.location.href = 'index.html'
+  }, 1000)
+}
+
+const setScore = (score) => {
+  document.cookie = `score=${score}; max-age=${30 * 24 * 60 * 60};`
 }
 
 const updateScoreDisplay = (score) => {
@@ -42,7 +51,7 @@ const acceptCookiesAndName = () => {
   document.cookie = `name=${name}; max-age=${30 * 24 * 60 * 60};`
   document.cookie = `visited=true; max-age=${30 * 24 * 60 * 60};`
   document.cookie = `score=0; max-age=${30 * 24 * 60 * 60};`
-  onboarding.style.animation = 'fadeOut 1.5s ease'
+  fadeOut(onboarding, '1.5s')
   setTimeout(function () {
     onboarding.classList.add('hidden')
     renderPuzzlePreviews()

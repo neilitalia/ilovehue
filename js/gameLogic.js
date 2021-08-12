@@ -1,7 +1,32 @@
 const gameContainer = document.querySelector('main.game-container')
 const gameState = {
-  selectedPuzzle: null,
+  actualPuzzle: null,
   shuffledPuzzle: null
+}
+
+const animateWin = (currentScore) => {
+  const winContainer = document.createElement('div')
+  const winText = document.createElement('h1')
+  const winScore = document.createElement('h2')
+  winContainer.classList.add('win-div')
+  winText.innerHTML = '✨🎆 Puzzle Solved! 🎆✨'
+  winScore.innerHTML = `🎇 Your score: ${currentScore} 🎇`
+  winContainer.append(winText)
+  winContainer.append(winScore)
+  fadeOut(gameContainer)
+
+  setTimeout(() => {
+    removeChildrenFrom(gameContainer)
+    gameContainer.append(winContainer)
+    fadeIn(gameContainer)
+  }, 1000)
+  setTimeout(() => {
+    fadeOut(gameContainer)
+  }, 3000)
+  setTimeout(() => {
+    removeChildrenFrom(gameContainer)
+    window.location.href = 'index.html'
+  }, 4000)
 }
 
 const checkForWin = () => {
@@ -12,34 +37,12 @@ const checkForWin = () => {
       return true
     }
   })
-  if (correctTiles.length === gameState.selectedPuzzle.board.length) {
+  if (correctTiles.length === gameState.actualPuzzle.board.length) {
     let currentScore = parseInt(cookies.score)
     currentScore += correctTiles.length // * Adds number of tiles to score
-    document.cookie = `score=${currentScore}; max-age=${30 * 24 * 60 * 60};`
+    setScore(currentScore)
     updateScoreDisplay(currentScore)
-
-    const winContainer = document.createElement('div')
-    const winText = document.createElement('h1')
-    const winScore = document.createElement('h2')
-    winContainer.classList.add('win-div')
-    winText.innerHTML = '✨🎆 Puzzle Solved! 🎆✨'
-    winScore.innerHTML = `🎇 Your score: ${currentScore} 🎇`
-    winContainer.append(winText)
-    winContainer.append(winScore)
-    gameContainer.style.animation = 'fadeOut 1s ease'
-
-    setTimeout(() => {
-      gameContainer.innerHTML = ''
-      gameContainer.append(winContainer)
-      gameContainer.style.animation = 'fadeIn 1s ease'
-    }, 1000)
-    setTimeout(() => {
-      gameContainer.style.animation = 'fadeOut 1s ease'
-    }, 2000)
-    setTimeout(() => {
-      gameContainer.innerHTML = ''
-      window.location.href = 'index.html'
-    }, 3000)
+    animateWin(currentScore)
   }
 }
 
@@ -76,39 +79,36 @@ const shuffleTiles = (object) => {
   return newShuffledObject
 }
 
-const renderPuzzle = (objToRender, frozen) => {
-  gameContainer.innerHTML = ''
+const renderPuzzle = (objToRender, playable) => {
+  removeChildrenFrom(gameContainer)
   gameContainer.style.animation = 'fadeIn 1s ease-in'
 
   const puzzle = objToRender
   const gameBoard = document.createElement('div')
 
-  frozen
+  playable
     ? gameContainer.classList.add('frozen')
     : gameContainer.classList.remove('frozen')
 
-  gameBoard.classList.add('preview-board', `${puzzle.difficulty}`)
   gameBoard.style.cssText = `
     height: ${puzzle.boardSize};
     width: ${puzzle.boardSize};
     display: grid;
     grid-template-columns: repeat(${puzzle.gridSize}, ${puzzle.tileSize});
     grid-template-rows: repeat(${puzzle.gridSize}, ${puzzle.tileSize});
-    transition: box-shadow 0.3s ease;
   `
   puzzle.board.forEach((tile, index) => {
-    const isFixed = puzzle.fixedTiles.includes(index)
+    const tileIsFixed = puzzle.fixedTiles.includes(index)
     const tileDiv = document.createElement('div')
     tileDiv.classList.add('game-tile')
-    tileDiv.dataset.position = gameState.selectedPuzzle.board.indexOf(tile)
+    tileDiv.dataset.position = gameState.actualPuzzle.board.indexOf(tile)
     tileDiv.style.cssText = `
       position: relative;
       height: ${puzzle.tileSize};
       width: ${puzzle.tileSize};
       background-color: ${tile};
-      transition: 0.2s ease;
     `
-    if (isFixed) {
+    if (tileIsFixed) {
       tileDiv.classList.add('fixed')
     } else {
       tileDiv.classList.add('draggable')
@@ -141,14 +141,13 @@ window.addEventListener('load', () => {
     window.location.href = 'index.html'
   }
   query = getQueryFromURL()
-  gameState.selectedPuzzle = getPuzzles(query)
+  gameState.actualPuzzle = getPuzzles(query)
   gameState.shuffledPuzzle = shuffleTiles(getPuzzles(query))
   // * First renders completed puzzle
-  renderPuzzle(gameState.selectedPuzzle, true)
+  renderPuzzle(gameState.actualPuzzle, true)
 
   // * Animates for a bit
   setTimeout(() => {
-    // gameContainer.style.animation = 'fadeOut 1s ease'
     fadeOut(gameContainer)
   }, 3000)
 
