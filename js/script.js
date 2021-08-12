@@ -1,6 +1,8 @@
+const body = document.querySelector('body')
 const nameDisplay = document.querySelector('h3.name-display')
 const scoreDisplay = document.querySelector('h3.score-display')
 const onboarding = document.querySelector('main.onboarding')
+const darkThemeToggle = document.querySelector('button.dark-mode-toggle')
 let cookies = null
 
 const formatCookiesToObj = () => {
@@ -23,8 +25,8 @@ const updateNameDisplay = () => {
 const resetCookies = () => {
   document.cookie = `name='';expires=Thu, 01 Jan 1970 00:00:00 GMT;`
   document.cookie = `visited=false; expires=Thu, 01 Jan 1970 00:00:00 GMT`
+  document.cookie = `darkmode=false;expires=Thu, 01 Jan 1970 00:00:00 GMT;`
   document.cookie = `score=0;expires=Thu, 01 Jan 1970 00:00:00 GMT;`
-  const body = document.querySelector('body')
   fadeOut(body)
   setTimeout(() => {
     removeChildrenFrom(body)
@@ -50,6 +52,7 @@ const acceptCookiesAndName = () => {
   nameDisplay.innerHTML = `Welcome, ${name}!`
   document.cookie = `name=${name}; max-age=${30 * 24 * 60 * 60};`
   document.cookie = `visited=true; max-age=${30 * 24 * 60 * 60};`
+  document.cookie = `darkmode=false; max-age=${30 * 24 * 60 * 60};`
   document.cookie = `score=0; max-age=${30 * 24 * 60 * 60};`
   fadeOut(onboarding, '1.5s')
   setTimeout(function () {
@@ -73,6 +76,18 @@ const onboard = () => {
   })
 }
 
+const toggleDarkTheme = () => {
+  if (cookies.darkmode === 'false') {
+    body.classList.add('dark-theme')
+    cookies.darkmode = 'true'
+    document.cookie = `darkmode=true; max-age=${30 * 24 * 60 * 60};`
+  } else {
+    cookies.darkmode = 'false'
+    body.classList.remove('dark-theme')
+    document.cookie = `darkmode=false; max-age=${30 * 24 * 60 * 60};`
+  }
+}
+
 window.addEventListener('load', () => {
   cookies = document.cookie
   formatCookiesToObj()
@@ -82,8 +97,16 @@ window.addEventListener('load', () => {
 
   updateNameDisplay()
   updateScoreDisplay()
+
+  if (cookies.darkmode === 'true') {
+    body.classList.add('dark-theme')
+  }
 })
 
 scoreDisplay.addEventListener('click', () => {
   resetCookies()
+})
+
+darkThemeToggle.addEventListener('click', () => {
+  toggleDarkTheme()
 })
