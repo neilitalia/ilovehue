@@ -20,7 +20,7 @@
     <h3 class="score-display" data-text="Reset everything?">Your score: 0</h3>
   </header>
   <main>
-      <h1>Wanna know how to play?</h1>
+      <h1>🎮 Wanna know how to play?</h1>
       <article>
         <div class="game-board">
           <div class="game-tile fixed" data-position="0"></div>
@@ -37,7 +37,17 @@
         <p>Some tiles are fixed. They're marked with dots in the center. Use these fixed tiles as reference for how the grid should look.</p>
       </article>
       <article>
-        <div class="game-board" id="playable"></div>
+        <div class="game-board" id="playable">
+          <div class="game-tile fixed" data-position="0"></div>
+          <div class="game-tile draggable" data-position="7"></div>
+          <div class="game-tile fixed" data-position="2"></div>
+          <div class="game-tile draggable" data-position="1"></div>
+          <div class="game-tile draggable" data-position="5"></div>
+          <div class="game-tile draggable" data-position="4"></div>
+          <div class="game-tile fixed" data-position="6"></div>
+          <div class="game-tile draggable" data-position="3"></div>
+          <div class="game-tile fixed" data-position="8"></div>
+        </div>
         <h2>Your main goal is to sort tiles so the colors 'flow'</h2>
         <p>You can move all tiles without dots. Click on the first tile you want to switch then click on another tile to switch their positions. Try it on the board on the left. </p>
       </article>
@@ -62,7 +72,7 @@
     <a href="#">How To Play</a>
     <a href="credits.html">Credits</a>
   </footer>
-  <div class="hovering-square hidden"></div>
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
   <script src="js/utils.js"></script>
   <script src="js/script.js"></script>
   <script src="js/instructions.js"></script>
