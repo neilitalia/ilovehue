@@ -5,7 +5,6 @@ main.puzzles {
   padding: 100px 0 100px 0px;
 }
 
-/* width */
 ::-webkit-scrollbar {
   height: 13px;
   width: 13px;
@@ -20,10 +19,18 @@ main.puzzles {
   background: #1815192a;
 }
 
-/* Handle */
+body.dark-theme > ::-webkit-scrollbar-track {
+  border-radius: 13px;
+  background: #e9e9d146;
+}
+
 ::-webkit-scrollbar-thumb:horizontal {
   background: var(--dark-purple);
   border-radius: 10px;
+}
+
+body.dark-theme > ::-webkit-scrollbar-thumb:horizontal {
+  background: var(--tan);
 }
 
 article {

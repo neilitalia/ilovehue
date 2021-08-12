@@ -79,14 +79,19 @@ const shuffleTiles = (object) => {
   return newShuffledObject
 }
 
-const renderPuzzle = (objToRender, playable) => {
+const renderPuzzle = (objToRender, preview) => {
   removeChildrenFrom(gameContainer)
   gameContainer.style.animation = 'fadeIn 1s ease-in'
 
   const puzzle = objToRender
   const gameBoard = document.createElement('div')
+  const gameStats = document.createElement('div')
+  const correctTiles = document.createElement('h1')
+  correctTiles.innerHTML = '123'
 
-  playable
+  gameStats.append(correctTiles)
+
+  preview
     ? gameContainer.classList.add('frozen')
     : gameContainer.classList.remove('frozen')
 
@@ -127,6 +132,7 @@ const renderPuzzle = (objToRender, playable) => {
     animation: 250,
     onEnd: () => checkForWin()
   })
+  gameContainer.append(gameStats)
   gameContainer.append(gameBoard)
 }
 

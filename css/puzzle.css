@@ -1,3 +1,8 @@
+main.game-container {
+  display: flex;
+  flex-direction: column;
+}
+
 div.hovered-tile {
   z-index: 10;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);

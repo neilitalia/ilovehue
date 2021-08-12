@@ -21,6 +21,11 @@ body {
   color: var(--dark-purple);
 }
 
+body.dark-theme {
+  color: var(--tan);
+  background-color: var(--dark-purple);
+}
+
 p {
   font-size: large;
 }
@@ -37,6 +42,10 @@ header {
   justify-content: space-between;
   align-items: baseline;
   color: var(--dark-purple);
+}
+
+body.dark-theme > header {
+  color: var(--tan);
 }
 
 h3.score-display {
@@ -62,6 +71,12 @@ h3.score-display::before {
 }
 h3.score-display:hover:before {
   opacity: 1;
+}
+
+button.dark-mode-toggle {
+  padding: 5px;
+  border-radius: 20px;
+  font-size: 20px;
 }
 
 /* *############
@@ -132,20 +147,28 @@ div.cookie-prompt > button:hover {
   cursor: pointer;
 }
 
+body.dark-theme > main > ul > li > a {
+  color: var(--tan);
+}
+
 /* *############
   * FOOTER STYLES
   * ############ */
 
 footer {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   padding: 15px;
 }
 
-footer > a {
+footer > div > a {
   color: var(--dark-purple);
   margin: 0 15px;
   font-size: large;
+}
+
+body.dark-theme > footer > div > a {
+  color: var(--tan);
 }
 
 @keyframes grow {
