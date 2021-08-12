@@ -18,23 +18,28 @@ const checkForWin = () => {
     document.cookie = `score=${currentScore}; max-age=${30 * 24 * 60 * 60};`
     updateScoreDisplay(currentScore)
 
+    const winContainer = document.createElement('div')
+    const winText = document.createElement('h1')
+    const winScore = document.createElement('h2')
+    winContainer.classList.add('win-div')
+    winText.innerHTML = '✨🎆 Puzzle Solved! 🎆✨'
+    winScore.innerHTML = `🎇 Your score: ${currentScore} 🎇`
+    winContainer.append(winText)
+    winContainer.append(winScore)
     gameContainer.style.animation = 'fadeOut 1s ease'
+
     setTimeout(() => {
-      const winContainer = document.createElement('div')
-      const winText = document.createElement('h1')
-      const winScore = document.createElement('h2')
-
       gameContainer.innerHTML = ''
-      gameContainer.style.animation = 'fadeIn 1s ease'
-
-      winContainer.classList.add('win-div')
-      winText.innerHTML = '✨🎆 Puzzle Solved! 🎆✨'
-      winScore.innerHTML = `🎇 Your score: ${currentScore} 🎇`
-      winContainer.append(winText)
-      winContainer.append(winScore)
-
       gameContainer.append(winContainer)
+      gameContainer.style.animation = 'fadeIn 1s ease'
     }, 1000)
+    setTimeout(() => {
+      gameContainer.style.animation = 'fadeOut 1s ease'
+    }, 2000)
+    setTimeout(() => {
+      gameContainer.innerHTML = ''
+      window.location.href = 'index.html'
+    }, 3000)
   }
 }
 
@@ -143,7 +148,8 @@ window.addEventListener('load', () => {
 
   // * Animates for a bit
   setTimeout(() => {
-    gameContainer.style.animation = 'fadeOut 1s ease-out'
+    // gameContainer.style.animation = 'fadeOut 1s ease'
+    fadeOut(gameContainer)
   }, 3000)
 
   // * Then renders shuffled puzzle
