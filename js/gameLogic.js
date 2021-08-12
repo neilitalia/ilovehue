@@ -20,16 +20,19 @@ const checkForWin = () => {
 
     gameContainer.style.animation = 'fadeOut 1s ease'
     setTimeout(() => {
-      gameContainer.innerHTML = ''
-      gameContainer.style.animation = 'fadeIn 1s ease'
       const winContainer = document.createElement('div')
       const winText = document.createElement('h1')
       const winScore = document.createElement('h2')
+
+      gameContainer.innerHTML = ''
+      gameContainer.style.animation = 'fadeIn 1s ease'
+
       winContainer.classList.add('win-div')
       winText.innerHTML = '✨🎆 Puzzle Solved! 🎆✨'
       winScore.innerHTML = `🎇 Your score: ${currentScore} 🎇`
       winContainer.append(winText)
       winContainer.append(winScore)
+
       gameContainer.append(winContainer)
     }, 1000)
   }
