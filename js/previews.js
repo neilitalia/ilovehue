@@ -31,6 +31,7 @@ const renderPuzzlePreviews = () => {
         width: ${puzzle.tileSize};
         background-color: ${tile};
         animation: grow ${1000 + index * 50}ms ease;
+        transform-origin: 20% 20%;
         transition: 0.2s ease;
       `
       previewDiv.append(tileDiv)
@@ -40,8 +41,9 @@ const renderPuzzlePreviews = () => {
     previewDifficulty.innerHTML = puzzle.difficulty
 
     previewArticle.addEventListener('click', () => {
-      previewContainer.style.animation = 'fadeOut 1.5s ease-out'
+      previewContainer.style.animation = 'fadeOut 1.5s ease'
       setTimeout(function () {
+        previewContainer.style.opacity = 0
         window.location.href = `puzzle.html#${puzzle.name}`
       }, 1400)
     })
