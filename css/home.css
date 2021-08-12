@@ -16,21 +16,12 @@ main.puzzles {
 
 ::-webkit-scrollbar-track {
   border-radius: 13px;
-  background: #1815192a;
-}
-
-body.dark-theme > ::-webkit-scrollbar-track {
-  border-radius: 13px;
-  background: #e9e9d146;
+  background: #75667a75;
 }
 
 ::-webkit-scrollbar-thumb:horizontal {
-  background: var(--dark-purple);
+  background: #7c7080;
   border-radius: 10px;
-}
-
-body.dark-theme > ::-webkit-scrollbar-thumb:horizontal {
-  background: var(--tan);
 }
 
 article {
