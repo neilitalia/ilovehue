@@ -27,9 +27,9 @@ const resetCookies = () => {
   location.reload()
 }
 
-const updateScoreDisplay = () => {
+const updateScoreDisplay = (score) => {
   if (cookies.visited) {
-    scoreDisplay.innerHTML = `Your score: ${cookies.score} 🔄`
+    scoreDisplay.innerHTML = `Your score: ${score ? score : cookies.score} 🔄`
   } else {
     scoreDisplay.innerHTML = `Your score: 0 🔄`
   }

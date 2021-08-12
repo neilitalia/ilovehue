@@ -6,13 +6,31 @@ const gameState = {
 
 const checkForWin = () => {
   const gameTiles = Array.from(document.querySelectorAll('div.game-tile'))
-  const mismatches = gameTiles.filter((tile, index) => {
+  const correctTiles = gameTiles.filter((tile, index) => {
     const tilePosition = parseInt(tile.dataset.position)
-    if (tilePosition !== index) {
+    if (tilePosition === index) {
       return true
     }
   })
-  console.log('mismatches :>> ', mismatches)
+  if (correctTiles.length === gameState.selectedPuzzle.board.length) {
+    let currentScore = parseInt(cookies.score)
+    currentScore += correctTiles.length // * Adds number of tiles to score
+    document.cookie = `score=${currentScore}; max-age=${30 * 24 * 60 * 60};`
+    updateScoreDisplay(currentScore)
+
+    gameContainer.style.animation = 'fadeOut 1s ease'
+    setTimeout(() => {
+      gameContainer.innerHTML = ''
+      gameContainer.style.animation = 'fadeIn 1s ease'
+      const winContainer = document.createElement('div')
+      const winText = document.createElement('h1')
+      winContainer.classList.add('win-div')
+      winText.classList.add('win-text')
+      winText.innerHTML = '✨🎆 Puzzle Solved! 🎆✨'
+      winContainer.append(winText)
+      gameContainer.append(winContainer)
+    }, 1000)
+  }
 }
 
 const shuffleTiles = (object) => {
@@ -29,9 +47,7 @@ const shuffleTiles = (object) => {
   // * Shuffle entire board
   while (unshuffled > 0) {
     const random = Math.floor(Math.random() * unshuffled)
-    const temp = board[random]
-    board[random] = board[unshuffled]
-    board[unshuffled] = temp
+    ;[board[random], board[unshuffled]] = [board[unshuffled], board[random]]
     unshuffled -= 1
   }
 
@@ -72,7 +88,7 @@ const renderPuzzle = (objToRender) => {
       height: ${puzzle.tileSize};
       width: ${puzzle.tileSize};
       background-color: ${tile};
-      transition: 0.3s ease;
+      transition: 0.2s ease;
     `
     if (isFixed) {
       tileDiv.classList.add('fixed')
@@ -103,20 +119,21 @@ const getQueryFromURL = () => {
 }
 
 window.addEventListener('load', () => {
+  if (!document.cookie) {
+    window.location.href = 'index.html'
+  }
   query = getQueryFromURL()
   getQueryFromURL()
   gameState.selectedPuzzle = getPuzzles(query)
-  console.log('selected puzzle :>> ', gameState.selectedPuzzle)
   gameState.shuffledPuzzle = shuffleTiles(getPuzzles(query))
-  console.log('shuffled puzzle :>> ', gameState.shuffledPuzzle)
   renderPuzzle(gameState.selectedPuzzle)
   gameContainer.classList.add('game-preview')
   gameContainer.style.animation = 'fadeIn 1s ease-in'
   setTimeout(() => {
-    gameContainer.classList.remove('game-preview')
     gameContainer.style.animation = 'fadeOut 1s ease-out'
   }, 3000)
   setTimeout(() => {
+    gameContainer.classList.remove('game-preview')
     gameContainer.innerHTML = ''
     gameContainer.style.animation = 'fadeIn 1s ease-in'
     renderPuzzle(gameState.shuffledPuzzle)

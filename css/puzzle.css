@@ -24,3 +24,11 @@ main.game-preview {
   user-select: none;
   pointer-events: none;
 }
+
+div.game-tile.draggable {
+  margin: 5px solid red;
+}
+
+div.win-div > h1.win-text {
+  font-size: 80px;
+}

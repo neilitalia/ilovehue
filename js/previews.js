@@ -40,8 +40,10 @@ const renderPuzzlePreviews = () => {
     previewDifficulty.innerHTML = puzzle.difficulty
 
     previewArticle.addEventListener('click', () => {
-      window.location.href = `puzzle.html#${puzzle.name}`
-      previewContainer.style.animation = 'fadeOut 1s ease-out'
+      previewContainer.style.animation = 'fadeOut 1.5s ease-out'
+      setTimeout(function () {
+        window.location.href = `puzzle.html#${puzzle.name}`
+      }, 1400)
     })
     previewArticle.append(previewDiv)
     previewArticle.append(previewTitle)
