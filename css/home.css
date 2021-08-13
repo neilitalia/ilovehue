@@ -5,7 +5,6 @@ main.puzzles {
   padding: 100px 0 100px 0px;
 }
 
-/* width */
 ::-webkit-scrollbar {
   height: 13px;
   width: 13px;
@@ -17,12 +16,11 @@ main.puzzles {
 
 ::-webkit-scrollbar-track {
   border-radius: 13px;
-  background: #1815192a;
+  background: #75667a75;
 }
 
-/* Handle */
 ::-webkit-scrollbar-thumb:horizontal {
-  background: var(--dark-purple);
+  background: #7c7080;
   border-radius: 10px;
 }
 

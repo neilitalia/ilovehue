@@ -2,9 +2,9 @@ const renderPuzzlePreviews = () => {
   const previewContainer = document.querySelector('main.puzzles')
   const allPuzzles = getPuzzles()
 
-  previewContainer.innerHTML = ''
+  removeChildrenFrom(previewContainer)
   previewContainer.classList.remove('hidden')
-  previewContainer.style.animation = 'fadeIn 1.5s ease'
+  fadeIn(previewContainer, '1.5s')
 
   allPuzzles.forEach((item) => {
     const puzzle = getPuzzles(item)
@@ -31,6 +31,7 @@ const renderPuzzlePreviews = () => {
         width: ${puzzle.tileSize};
         background-color: ${tile};
         animation: grow ${1000 + index * 50}ms ease;
+        transform-origin: 20% 20%;
         transition: 0.2s ease;
       `
       previewDiv.append(tileDiv)
@@ -40,8 +41,11 @@ const renderPuzzlePreviews = () => {
     previewDifficulty.innerHTML = puzzle.difficulty
 
     previewArticle.addEventListener('click', () => {
-      window.location.href = `puzzle.html#${puzzle.name}`
-      previewContainer.style.animation = 'fadeOut 1s ease-out'
+      fadeOut(previewContainer)
+      setTimeout(function () {
+        previewContainer.style.opacity = 0
+        window.location.href = `puzzle.html#${puzzle.name}`
+      }, 1000)
     })
     previewArticle.append(previewDiv)
     previewArticle.append(previewTitle)

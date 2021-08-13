@@ -1,18 +1,49 @@
 const gameContainer = document.querySelector('main.game-container')
 const gameState = {
-  selectedPuzzle: null,
+  actualPuzzle: null,
   shuffledPuzzle: null
+}
+
+const animateWin = (currentScore) => {
+  const winContainer = document.createElement('div')
+  const winText = document.createElement('h1')
+  const winScore = document.createElement('h2')
+  winContainer.classList.add('win-div')
+  winText.innerHTML = '✨🎆 Puzzle Solved! 🎆✨'
+  winScore.innerHTML = `🎇 Your score: ${currentScore} 🎇`
+  winContainer.append(winText)
+  winContainer.append(winScore)
+  fadeOut(gameContainer)
+
+  setTimeout(() => {
+    removeChildrenFrom(gameContainer)
+    gameContainer.append(winContainer)
+    fadeIn(gameContainer)
+  }, 1000)
+  setTimeout(() => {
+    fadeOut(gameContainer)
+  }, 3000)
+  setTimeout(() => {
+    removeChildrenFrom(gameContainer)
+    window.location.href = 'index.html'
+  }, 4000)
 }
 
 const checkForWin = () => {
   const gameTiles = Array.from(document.querySelectorAll('div.game-tile'))
-  const mismatches = gameTiles.filter((tile, index) => {
+  const correctTiles = gameTiles.filter((tile, index) => {
     const tilePosition = parseInt(tile.dataset.position)
-    if (tilePosition !== index) {
+    if (tilePosition === index) {
       return true
     }
   })
-  console.log('mismatches :>> ', mismatches)
+  if (correctTiles.length === gameState.actualPuzzle.board.length) {
+    let currentScore = parseInt(cookies.score)
+    currentScore += correctTiles.length // * Adds number of tiles to score
+    setScore(currentScore)
+    updateScoreDisplay(currentScore)
+    animateWin(currentScore)
+  }
 }
 
 const shuffleTiles = (object) => {
@@ -29,9 +60,7 @@ const shuffleTiles = (object) => {
   // * Shuffle entire board
   while (unshuffled > 0) {
     const random = Math.floor(Math.random() * unshuffled)
-    const temp = board[random]
-    board[random] = board[unshuffled]
-    board[unshuffled] = temp
+    ;[board[random], board[unshuffled]] = [board[unshuffled], board[random]]
     unshuffled -= 1
   }
 
@@ -50,31 +79,39 @@ const shuffleTiles = (object) => {
   return newShuffledObject
 }
 
-const renderPuzzle = (objToRender) => {
+const renderPuzzle = (objToRender, preview) => {
+  removeChildrenFrom(gameContainer)
+
   const puzzle = objToRender
   const gameBoard = document.createElement('div')
-  gameBoard.classList.add('preview-board', `${puzzle.difficulty}`)
+
+  if (preview) {
+    gameContainer.classList.add('frozen')
+    fadeIn(gameContainer)
+  } else {
+    gameContainer.classList.remove('frozen')
+    spinIn(gameContainer)
+  }
+
   gameBoard.style.cssText = `
     height: ${puzzle.boardSize};
     width: ${puzzle.boardSize};
     display: grid;
     grid-template-columns: repeat(${puzzle.gridSize}, ${puzzle.tileSize});
     grid-template-rows: repeat(${puzzle.gridSize}, ${puzzle.tileSize});
-    transition: box-shadow 0.3s ease;
   `
   puzzle.board.forEach((tile, index) => {
-    const isFixed = puzzle.fixedTiles.includes(index)
+    const tileIsFixed = puzzle.fixedTiles.includes(index)
     const tileDiv = document.createElement('div')
     tileDiv.classList.add('game-tile')
-    tileDiv.dataset.position = gameState.selectedPuzzle.board.indexOf(tile)
+    tileDiv.dataset.position = gameState.actualPuzzle.board.indexOf(tile)
     tileDiv.style.cssText = `
       position: relative;
       height: ${puzzle.tileSize};
       width: ${puzzle.tileSize};
       background-color: ${tile};
-      transition: 0.3s ease;
     `
-    if (isFixed) {
+    if (tileIsFixed) {
       tileDiv.classList.add('fixed')
     } else {
       tileDiv.classList.add('draggable')
@@ -103,22 +140,22 @@ const getQueryFromURL = () => {
 }
 
 window.addEventListener('load', () => {
+  if (!document.cookie) {
+    window.location.href = 'index.html'
+  }
   query = getQueryFromURL()
-  getQueryFromURL()
-  gameState.selectedPuzzle = getPuzzles(query)
-  console.log('selected puzzle :>> ', gameState.selectedPuzzle)
+  gameState.actualPuzzle = getPuzzles(query)
   gameState.shuffledPuzzle = shuffleTiles(getPuzzles(query))
-  console.log('shuffled puzzle :>> ', gameState.shuffledPuzzle)
-  renderPuzzle(gameState.selectedPuzzle)
-  gameContainer.classList.add('game-preview')
-  gameContainer.style.animation = 'fadeIn 1s ease-in'
+  // * First renders completed puzzle
+  renderPuzzle(gameState.actualPuzzle, true)
+
+  // * Animates for a bit
   setTimeout(() => {
-    gameContainer.classList.remove('game-preview')
-    gameContainer.style.animation = 'fadeOut 1s ease-out'
+    spinOut(gameContainer)
   }, 3000)
+
+  // * Then renders shuffled puzzle
   setTimeout(() => {
-    gameContainer.innerHTML = ''
-    gameContainer.style.animation = 'fadeIn 1s ease-in'
-    renderPuzzle(gameState.shuffledPuzzle)
-  }, 4000)
+    renderPuzzle(gameState.shuffledPuzzle, false)
+  }, 3900)
 })

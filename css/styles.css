@@ -1,8 +1,12 @@
 :root {
   --tan: #e9e9d1;
+  --tan-shadow: #bdaf8198;
   --dark-purple: #181519;
+  --dark-purple-shadow: #18151967;
   --green: #388e3c;
+  --green-shadow: #498e387e;
   --red: #c24141;
+  --red-shadow: #c2414173;
 }
 
 * {
@@ -19,6 +23,11 @@ body {
   font-family: 'Josefin Sans', sans-serif;
   background-color: var(--tan);
   color: var(--dark-purple);
+}
+
+body.dark-mode {
+  color: var(--tan);
+  background-color: var(--dark-purple);
 }
 
 p {
@@ -39,6 +48,10 @@ header {
   color: var(--dark-purple);
 }
 
+body.dark-mode > header {
+  color: var(--tan);
+}
+
 h3.score-display {
   cursor: pointer;
   position: relative;
@@ -56,7 +69,7 @@ h3.score-display::before {
   background: var(--red);
   color: var(--tan);
   text-align: center;
-  box-shadow: 0px 10px 10px #c2414173;
+  box-shadow: 0px 10px 10px var(--red-shadow);
   opacity: 0;
   transition: 0.2s ease;
 }
@@ -116,7 +129,7 @@ div.cookie-prompt > input:hover,
 div.cookie-prompt > input:active,
 div.cookie-prompt > input:focus {
   width: 50%;
-  box-shadow: 0px 10px 10px #bdaf8198;
+  box-shadow: 0px 10px 10px var(--tan-shadow);
 }
 
 div.cookie-prompt > button {
@@ -128,8 +141,12 @@ div.cookie-prompt > button {
 div.cookie-prompt > button:hover {
   background-color: var(--green);
   color: var(--tan);
-  box-shadow: 0px 10px 10px #498e387e;
+  box-shadow: 0px 10px 10px var(--green-shadow);
   cursor: pointer;
+}
+
+body.dark-mode > main > ul > li > a {
+  color: var(--tan);
 }
 
 /* *############
@@ -138,14 +155,42 @@ div.cookie-prompt > button:hover {
 
 footer {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   padding: 15px;
 }
 
-footer > a {
+footer > div > a {
   color: var(--dark-purple);
   margin: 0 15px;
   font-size: large;
+}
+
+body.dark-mode > footer > div > a {
+  color: var(--tan);
+}
+
+button.dark-mode-toggle {
+  color: var(--tan);
+  background-color: var(--dark-purple);
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 20px;
+  font-size: 20px;
+  transition: all 0.3s ease;
+}
+
+body.dark-mode > footer > button.dark-mode-toggle {
+  background-color: var(--tan);
+  color: var(--dark-purple);
+}
+
+button.dark-mode-toggle:hover {
+  transform: scale(1.1);
+  box-shadow: 0px 5px 6px var(--dark-purple-shadow);
+}
+
+body.dark-mode > footer > button:hover {
+  box-shadow: 0px 5px 6px var(--tan-shadow);
 }
 
 @keyframes grow {
@@ -188,6 +233,28 @@ footer > a {
     opacity: 0;
   }
   100% {
+    opacity: 1;
+  }
+}
+
+@keyframes spinOut {
+  0% {
+    transform: rotate(0deg) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(720deg) scale(0.7);
+    opacity: 0;
+  }
+}
+
+@keyframes spinIn {
+  0% {
+    transform: rotate(-720deg) scale(0.7);
+    opacity: 0;
+  }
+  100% {
+    transform: rotate(0deg) scale(1);
     opacity: 1;
   }
 }
