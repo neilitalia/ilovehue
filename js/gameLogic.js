@@ -81,19 +81,17 @@ const shuffleTiles = (object) => {
 
 const renderPuzzle = (objToRender, preview) => {
   removeChildrenFrom(gameContainer)
-  gameContainer.style.animation = 'fadeIn 1s ease-in'
 
   const puzzle = objToRender
   const gameBoard = document.createElement('div')
-  const gameStats = document.createElement('div')
-  const correctTiles = document.createElement('h1')
-  correctTiles.innerHTML = '123'
 
-  gameStats.append(correctTiles)
-
-  preview
-    ? gameContainer.classList.add('frozen')
-    : gameContainer.classList.remove('frozen')
+  if (preview) {
+    gameContainer.classList.add('frozen')
+    fadeIn(gameContainer)
+  } else {
+    gameContainer.classList.remove('frozen')
+    spinIn(gameContainer)
+  }
 
   gameBoard.style.cssText = `
     height: ${puzzle.boardSize};
@@ -132,7 +130,6 @@ const renderPuzzle = (objToRender, preview) => {
     animation: 250,
     onEnd: () => checkForWin()
   })
-  gameContainer.append(gameStats)
   gameContainer.append(gameBoard)
 }
 
@@ -154,7 +151,7 @@ window.addEventListener('load', () => {
 
   // * Animates for a bit
   setTimeout(() => {
-    fadeOut(gameContainer)
+    spinOut(gameContainer)
   }, 3000)
 
   // * Then renders shuffled puzzle

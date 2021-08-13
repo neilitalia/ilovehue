@@ -1,6 +1,7 @@
 main.game-container {
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 div.hovered-tile {
